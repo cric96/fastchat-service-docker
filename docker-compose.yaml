@@ -1,0 +1,16 @@
+services:
+  controller:
+    build: ./controller/
+    ports: 
+      - "21001:21001"
+    network_mode: "host"
+  worker:
+    build: ./worker/
+    ports:
+      - "21002:21002"
+    network_mode: "host"
+  endpoint:
+    build: ./endpoint/
+    ports:
+      - "8000:8000"
+    network_mode: "host"
