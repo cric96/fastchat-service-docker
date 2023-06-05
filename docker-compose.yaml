@@ -1,17 +1,17 @@
 version: "3.9"
 services:
   controller:
-    build: ./controller/
+    image: gianlucaaguzzi/fastchat-controller:latest
     ports: 
       - "21001:21001"
-    network_mode: "host"
+    network_mode: "bridge"
   worker:
-    build: ./worker/
+    image: gianlucaaguzzi/fastchat-worker:latest
     ports:
       - "21002:21002"
-    network_mode: "host"
+    network_mode: "bridge"
   endpoint:
-    build: ./endpoint/
+    image: gianlucaaguzzi/fastchat-endpoint:latest
     ports:
       - "8000:8000"
-    network_mode: "host"
+    network_mode: "bridge"
