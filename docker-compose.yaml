@@ -1,18 +1,23 @@
 version: "3.9"
 services:
   controller:
+    build: ./controller
     image: gianlucaaguzzi/fastchat-controller:latest
-    environment:
-      - HOST
-    network_mode: "service:endpoint"
   worker:
+    build: ./worker
     image: gianlucaaguzzi/fastchat-worker:latest
     environment:
-      - HOST
-    network_mode: "service:endpoint"
+      - CONTROLLER_HOST
+      - WORKER_HOST
   endpoint:
+    build: ./endpoint
     image: gianlucaaguzzi/fastchat-endpoint:latest
+    network_mode: bridge
     ports: 
-      - "8000:21003"
+        - "${ENDPOINT_PORT}:${ENDPOINT_PORT}"
     environment:
-      - HOST
+      - CONTROLLER_HOST
+      - ENDPOINT_PORT
+    depends_on:
+      - controller
+      - worker
