@@ -12,7 +12,6 @@ services:
   endpoint:
     build: ./endpoint
     image: gianlucaaguzzi/fastchat-endpoint:latest
-    network_mode: bridge
     ports: 
         - "${ENDPOINT_PORT}:${ENDPOINT_PORT}"
     environment:
